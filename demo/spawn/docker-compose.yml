@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-gametodo}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gametodo}
+      POSTGRES_DB: ${POSTGRES_DB:-gametodo}
+    ports:
+      - "5432:5432"
+    volumes:
+      - gametodo_data:/var/lib/postgresql/data
+
+  bot:
+    build: .
+    depends_on:
+      - db
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
+      DATABASE_URL: ${DATABASE_URL}
+      TIMEZONE: ${TIMEZONE:-Europe/Moscow}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    volumes:
+      - ./logs:/app/logs
+
+volumes:
+  gametodo_data:

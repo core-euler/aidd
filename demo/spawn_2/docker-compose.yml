@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-bot}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-bot}
+      POSTGRES_DB: ${POSTGRES_DB:-gametodo}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  bot:
+    build:
+      context: ./bot
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
+      DATABASE_URL: ${DATABASE_URL}
+      TIMEZONE: ${TIMEZONE:-Europe/Moscow}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    depends_on:
+      - db
+
+volumes:
+  db_data:

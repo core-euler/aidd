@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: bot
+      POSTGRES_PASSWORD: bot
+      POSTGRES_DB: bot
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  bot:
+    build: ./bot
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
+      DATABASE_URL: ${DATABASE_URL}
+      TIMEZONE: ${TIMEZONE}
+      LOG_LEVEL: ${LOG_LEVEL}
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:

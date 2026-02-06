@@ -1,0 +1,170 @@
+2026-02-05 18:10:57,950 [INFO] aiogram.dispatcher: Start polling
+2026-02-05 18:11:06,023 [INFO] aiogram.dispatcher: Run polling for bot @lovelyNochka_bot id=6619515237 - 'Nochka'
+2026-02-05 18:11:11,346 [INFO] bot.actions: start: telegram_id=5101525651 username=okolo_boga
+2026-02-05 18:11:15,338 [INFO] aiogram.event: Update id=654593831 is handled. Duration 4002 ms by bot id=6619515237
+2026-02-05 18:11:23,265 [INFO] aiogram.event: Update id=654593832 is handled. Duration 725 ms by bot id=6619515237
+2026-02-05 18:11:29,226 [INFO] aiogram.event: Update id=654593833 is handled. Duration 360 ms by bot id=6619515237
+2026-02-05 18:11:32,779 [INFO] aiogram.event: Update id=654593834 is handled. Duration 2240 ms by bot id=6619515237
+2026-02-05 18:11:33,584 [INFO] bot.actions: task_created: telegram_id=5101525651 task_id=1 difficulty=easy deadline_utc=2026-02-05T19:11:33.571357+00:00
+2026-02-05 18:11:34,332 [INFO] aiogram.event: Update id=654593835 is handled. Duration 767 ms by bot id=6619515237
+2026-02-05 18:11:36,544 [INFO] aiogram.event: Update id=654593836 is handled. Duration 1014 ms by bot id=6619515237
+2026-02-05 18:11:38,079 [INFO] aiogram.event: Update id=654593837 is handled. Duration 661 ms by bot id=6619515237
+2026-02-05 18:11:39,894 [INFO] aiogram.event: Update id=654593838 is not handled. Duration 9 ms by bot id=6619515237
+2026-02-05 18:11:39,894 [ERROR] aiogram.event: Cause exception while process update id=654593838 by bot id=6619515237
+DataError: (psycopg.errors.NumericValueOutOfRange) integer out of range
+[SQL: SELECT tasks.id, tasks.user_id, tasks.title, tasks.difficulty, tasks.deadline, tasks.status, tasks.created_at, tasks.completed_at, tasks.reminder_sent 
+FROM tasks 
+WHERE tasks.id = %(id_1)s::INTEGER AND tasks.user_id = %(user_id_1)s::INTEGER]
+[parameters: {'id_1': 1, 'user_id_1': 5101525651}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/psycopg.py", line 586, in execute
+    result = self.await_(self._cursor.execute(query, params, **kw))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 131, in await_only
+    return current.driver.switch(awaitable)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/psycopg/cursor_async.py", line 89, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.NumericValueOutOfRange: integer out of range
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/app/app/bot/handlers/router.py", line 285, in cb_task_view
+    task = await TaskService(session).get_task(task_id, query.from_user.id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/bot/services/task_service.py", line 64, in get_task
+    result = await self._session.execute(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/session.py", line 461, in execute
+    result = await greenlet_spawn(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 201, in greenlet_spawn
+    result = context.throw(*sys.exc_info())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2236, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2353, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/psycopg.py", line 586, in execute
+    result = self.await_(self._cursor.execute(query, params, **kw))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 131, in await_only
+    return current.driver.switch(awaitable)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/psycopg/cursor_async.py", line 89, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.DataError: (psycopg.errors.NumericValueOutOfRange) integer out of range
+[SQL: SELECT tasks.id, tasks.user_id, tasks.title, tasks.difficulty, tasks.deadline, tasks.status, tasks.created_at, tasks.completed_at, tasks.reminder_sent 
+FROM tasks 
+WHERE tasks.id = %(id_1)s::INTEGER AND tasks.user_id = %(user_id_1)s::INTEGER]
+[parameters: {'id_1': 1, 'user_id_1': 5101525651}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2026-02-05 18:12:33,254 [WARNING] aiogram.dispatcher: Received SIGTERM signal
+2026-02-05 18:12:33,258 [INFO] aiogram.dispatcher: Polling stopped for bot @lovelyNochka_bot id=6619515237 - 'Nochka'
+2026-02-05 18:12:33,259 [INFO] aiogram.dispatcher: Polling stopped
+2026-02-05 18:12:45,063 [INFO] aiogram.dispatcher: Start polling
+2026-02-05 18:12:48,978 [INFO] bot.scheduler: reminder_sent: user_id=1 task_id=1 deadline_utc=2026-02-05T19:11:33.571357+00:00
+2026-02-05 18:12:49,144 [INFO] aiogram.dispatcher: Run polling for bot @lovelyNochka_bot id=6619515237 - 'Nochka'
+2026-02-05 18:13:02,338 [INFO] bot.actions: start: telegram_id=5101525651 username=okolo_boga
+2026-02-05 18:13:02,668 [INFO] aiogram.event: Update id=654593839 is handled. Duration 336 ms by bot id=6619515237
+2026-02-05 18:13:05,958 [INFO] aiogram.event: Update id=654593840 is handled. Duration 691 ms by bot id=6619515237
+2026-02-05 18:13:07,420 [INFO] aiogram.event: Update id=654593841 is handled. Duration 676 ms by bot id=6619515237
+2026-02-05 18:13:09,692 [INFO] aiogram.event: Update id=654593842 is handled. Duration 1032 ms by bot id=6619515237
+2026-02-05 18:13:11,080 [INFO] aiogram.event: Update id=654593843 is handled. Duration 668 ms by bot id=6619515237
+2026-02-05 18:13:11,886 [INFO] bot.actions: task_completed: telegram_id=5101525651 task_id=1 xp=10 status=completed
+2026-02-05 18:13:13,323 [INFO] aiogram.event: Update id=654593844 is handled. Duration 1449 ms by bot id=6619515237
+2026-02-05 18:13:17,502 [INFO] aiogram.event: Update id=654593845 is handled. Duration 1662 ms by bot id=6619515237
+2026-02-05 18:13:18,832 [INFO] aiogram.event: Update id=654593847 is handled. Duration 717 ms by bot id=6619515237
+2026-02-05 18:13:20,354 [INFO] aiogram.event: Update id=654593848 is handled. Duration 1017 ms by bot id=6619515237
+2026-02-05 18:13:21,117 [INFO] aiogram.event: Update id=654593846 is handled. Duration 4053 ms by bot id=6619515237
+2026-02-05 18:13:22,133 [INFO] aiogram.event: Update id=654593849 is handled. Duration 650 ms by bot id=6619515237
+2026-02-05 18:13:23,275 [INFO] aiogram.event: Update id=654593850 is handled. Duration 713 ms by bot id=6619515237
+2026-02-05 18:13:24,429 [INFO] aiogram.event: Update id=654593851 is handled. Duration 641 ms by bot id=6619515237
+2026-02-05 18:13:38,398 [WARNING] aiogram.dispatcher: Received SIGTERM signal
+2026-02-05 18:13:38,400 [INFO] aiogram.dispatcher: Polling stopped for bot @lovelyNochka_bot id=6619515237 - 'Nochka'
+2026-02-05 18:13:38,401 [INFO] aiogram.dispatcher: Polling stopped
